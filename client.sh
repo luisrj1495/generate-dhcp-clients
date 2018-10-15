@@ -30,14 +30,35 @@ done
   
 }
 
-while [ "$opt" != "yes" ]; do
+function showsOptions(){
+  if [ "$1" = "yes" ];
+  then
+    echo "-r, –release # Releases obtained DHCP IP for corresponding MAC"
+    echo "-I, –option50-ip [ IP_address ] # Option 50 IP address on DHCP discover"
+    echo "-o, –option60-vci [ VCI_string ] # Vendor Class Idendifier string"
+    echo "-v, –vlan [ vlan_id ] # VLAN ID. Range(2 – 4094)"
+    echo "-t, –tos [ TOS_value ] # IP header TOS value"
+    echo "-i, –interface [ interface ] # Interface to use. Default eth0"
+    echo "-T, –timeout [ cmd_timeout ] # Command returns within specified timout in seconds"
+    echo "-b, –bind-ip # Listens on the obtained IP. Supported protocols – ARP and ICMP"
+    echo "-k, –bind-timeout [ timeout ] # Listen timout in seconds. Default 3600 seconds"
+    echo "-f, –bcast_flag # Sets broadcast flag on DHCP discover and request"
+    echo "-V, –verbose # Prints DHCP offer and ack details"
+
+fi
+}
+
+while [ "$OPT" != "yes" ]; do
+  echo "Do you want show the options ? (yes / no)"
+    read SHOW
+    showsOptions $SHOW
   echo "Intoduce how many clients do you want generate ?"
     read CLIENTS
   echo "Intoduce your interface network ?"
     read INTERFACE
   generateMacs $CLIENTS $INTERFACE
   echo "Do you want close ? (yes / no) "
-    read opt
+    read OPT
   clear
 done
 
