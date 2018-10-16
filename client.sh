@@ -5,7 +5,10 @@ if [ -d $PWD/dhtest ];
     echo "File Ready :)"
   else
     echo "Download files..."
-    echo `git clone https://github.com/saravana815/dhtest.git`
+    sudo apt-get update
+    sudo apt-get install git
+    sudo apt-get install build-essential
+    git clone https://github.com/saravana815/dhtest.git
     cd $PWD/dhtest/
     gcc -c -o dhtest.o dhtest.c
     gcc -c -o functions.o functions.c
